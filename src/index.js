@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
-import https from 'https';
+
+import http from 'http';
 import { readFileSync } from 'fs';
 import { resolve, join } from 'path';
 import passport from 'passport';
@@ -67,12 +68,12 @@ if (isProduction) {
 } else {
   const port = process.env.PORT || 5000;
 
-  const httpsOptions = {
-    key: readFileSync(resolve(__dirname, '../security/cert.key')),
-    cert: readFileSync(resolve(__dirname, '../security/cert.pem')),
-  };
+  // const httpsOptions = {
+  //   key: readFileSync(resolve(__dirname, '../security/cert.key')),
+  //   cert: readFileSync(resolve(__dirname, '../security/cert.pem')),
+  // };
 
-  const server = https.createServer(httpsOptions, app).listen(port, () => {
+  const server = http.createServer(app).listen(port, () => {
     console.log('https server running at ' + port);
     // console.log(all_routes(app));
   });
